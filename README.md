@@ -114,3 +114,39 @@
 入力：1324
 
 出力：3回で正解！
+
+# Convert_Hash仕様
+hashの中に入った文字列の値"foo"を、"uryyyy!!"に変換する関数を作る。
+
+ただし、hashの中には、hash自体が入れ子構造になっているとする。条件として、入れ子の末端は必ず、"text"をキーとした値が入るようになっている。
+
+入力例を含んだプログラム例：
+
+hash = {
+  "main" : {
+    "first" : { "text" : "foobar" },
+    "second" : { "text" : "fizzbuzz", "child" : { "text" : "foobar" } }
+  },
+  "sub" : {
+    "first" : { "text" : "fizzbuzz", "child" : { "text" : "foobar" } },
+    "second" : {
+      "third" : { "text" : "barfoo", "child" : { "text" : "foobar" } },
+      "forth" : { "child" : { "text" : "jit_foo_foo" } }
+    }
+  },
+  "text" : "foofava"
+}
+
+console.log(toUry(hash))
+
+上記の出力例が以下：
+
+{"main":
+ {"first":{"text":"uryyyy!!bar"},
+  "second":{"text":"fizzbuzz", "child":{"text":"uryyyy!!bar"}}},
+"sub":
+ {"first":{"text":"fizzbuzz", "child":{"text":"uryyyy!!bar"}},
+  "second":
+   {"third":{"text":"baruryyyy!!", "child":{"text":"uryyyy!!bar"}},
+    "forth":{"child":{"text":"jit_uryyyy!!_uryyyy!!"}}}},
+"text":"uryyyy!!fava"}

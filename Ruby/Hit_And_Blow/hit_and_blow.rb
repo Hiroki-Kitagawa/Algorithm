@@ -5,37 +5,36 @@ def judgement_hit_and_blow(rand_array, input)
 	# 入力値を数字1桁ごとに分割する
 	input_array = input.scan(/\d/)
 
-	if input_array.size > 4
-		input_num
-	end
-
-	input_array.map!(&:to_i)
-
-	if rand_array == input_array
-		# 正解した場合、正解までに要した入力回数を表示する
-		$input_counter.to_s + '回で正解！'
+	if input_array.size > 4 || input_array.size < 4
+		judgement_hit_and_blow(rand_array, input_num)
 	else
-		# 外れた場合、Hits(数と桁位置の両方が同じであること)と
-		# Blow(数だけが同じで桁位置が異なること)を数える
-		hits = 0
-		rand_array.size.times{ |n|
-			if rand_array[n] == input_array[n]
-				hits += 1
-			end
-		}
-
-		blow = 0
-		rand_array.size.times{ |n|
-			input_array.size.times{ |m|
-				if rand_array[n] == input_array[m] && n != m
-					blow += 1
+		input_array.map!(&:to_i)
+		if rand_array == input_array
+			# 正解した場合、正解までに要した入力回数を表示する
+			$input_counter.to_s + '回で正解！'
+		else
+			# 外れた場合、Hits(数と桁位置の両方が同じであること)と
+			# Blow(数だけが同じで桁位置が異なること)を数える
+			hits = 0
+			rand_array.size.times{ |n|
+				if rand_array[n] == input_array[n]
+					hits += 1
 				end
 			}
-		}
-		puts '外れ： ' + hits.to_s + 'Hits, ' + blow.to_s + 'Blow'
-		$input_counter += 1
-		input = input_num
-		judgement_hit_and_blow(rand_array, input)
+
+			blow = 0
+			rand_array.size.times{ |n|
+				input_array.size.times{ |m|
+					if rand_array[n] == input_array[m] && n != m
+						blow += 1
+					end
+				}
+			}
+			puts '外れ： ' + hits.to_s + 'Hits, ' + blow.to_s + 'Blow'
+			$input_counter += 1
+			input = input_num
+			judgement_hit_and_blow(rand_array, input)
+		end
 	end
 end
 
@@ -74,6 +73,4 @@ def input_num
 end
 
 # メイン処理
-rand_array = create_rand_4_different_digits
-input = input_num
-puts judgement_hit_and_blow(rand_array, input)
+puts judgement_hit_and_blow(create_rand_4_different_digits, input_num)

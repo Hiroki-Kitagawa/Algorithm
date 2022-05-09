@@ -41,7 +41,6 @@ class HitAndBlow {
   }
 
   public static void inputNum() {
-    System.out.println("rand4digits : " + rand4digits);
     System.out.println("各桁が異なる4桁の数字を入力してください。");
     Scanner scanner = new Scanner(System.in);
     String inputNum = scanner.next();
